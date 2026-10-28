@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Saludador</title>
+</head>
+
+<body>
+    <h1>Crear saludador</h1>
+    <!-- Este metodo no sirve para enviar informacion porque debemos enviar un JSON -->
+    <!--<form action = "http://localhost:8081/crearSaludador" method="post">
+            <input type = "submit">
+        </form> -->
+        <label for="">nombre:</label>
+        <input type = "text" id = "v1">
+    <button onclick="crear()">Crear</button>
+    <script>
+        url = "http://localhost:8081/crearSaludador"
+        e = document.getElementById("v1")
+        function crear() {
+            usuario = e.value
+            //no emviar objetos a backemd. debemos transformarlos a caneda
+            //let cuerpo = JSON.parse('{"contenido":"ejemplo"}')
+            //console.log(cuerpo2
+            //alert(cuerpo2))
+            let cuerpo = JSON.stringify({contenido:`${e.value}`})
+            console.log(cuerpo)
+            fetch(url, {
+                method: "POST",
+                headers: {'Content-Type' : 'application/json'},
+                body: cuerpo
+            })
+                .then(async respuesta => {
+                    console.log(await respuesta)
+                })
+                .catch()
+        }
+    </script>
+</body>
+
+</html>
